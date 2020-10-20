@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+ <title>Post directory</title>
+ <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+ <style>
+   h1 {
+     font-family: 'Roboto Black', sans-serif;
+     font-size: 48px;
+   }
+   h2 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 30px;
+  }
+  h3 {
+    font-family: 'Roboto Light', sans-serif;
+    font-size: 20px;
+  }
+  table {
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+  }
+  a {
+    font-family: 'Roboto Black', sans-serif;
+    font-size: 15px;
+  }
+  a:link {
+    font-family: 'Roboto Black', sans-serif;
+    font-size: 15px;
+  }
+  a:visited {
+    font-family: 'Roboto Black', sans-serif;
+    font-size: 15px;
+    color: black;
+  }
+  a:focus {
+    font-family: 'Roboto Black', sans-serif;
+    font-size: 15px;
+  }
+  a:hover {
+    font-family: 'Roboto Black', sans-serif;
+    font-size: 15.5px;
+  }
+  a:active {
+    font-family: 'Roboto Black', sans-serif;
+    font-size: 15px;
+  }
+
+  .vhcenter {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+</style>
+</head>
+<body>
+    <div class = "vhcenter">
+    <table>
+        <tr>
+          <th>Title</th>
+          <th>content</th>
+        </tr>
+      </table>
+      <br/>
+      <script>
+        postTable = document.querySelector("table")
+    
+        /*
+        Use the browsers `fetch` API to make a GET call to /bird
+        We expect the response to be a JSON list of birds, of the
+        form :
+        [
+          {"species":"...","description":"..."},
+          {"species":"...","description":"..."}
+        ]
+        */
+        fetch("/post")
+          .then(response => response.json())
+          .then(postList => {
+            postList.forEach(post => {
+              row = document.createElement("tr")
+    
+              title = document.createElement("td")
+              title.innerHTML = post.title
+              content = document.createElement("td")
+              content.innerHTML = post.content
+    
+              row.appendChild(title)
+              row.appendChild(content)
+              postTable.appendChild(row)
+            })
+          })
+        </script>
+        <br>
+            <a href="../assets">Homepage.</a>&nbsp&nbsp<a href="../createPost">Create a post.</a>
+        <br>
+    </div>
+</body>
